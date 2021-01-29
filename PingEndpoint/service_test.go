@@ -9,7 +9,7 @@ import (
 func TestGetPing1(t *testing.T) {
 	resp, err := http.Get("http://localhost:8080/test/ping")
 	if err != nil {
-		// Don't want to write any error in this case
+		// Don't want to write any error in this case - not what we check for here 
 	}
 
 	body,err := ioutil.ReadAll(resp.Body)
