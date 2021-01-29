@@ -20,7 +20,6 @@ func getHome(w http.ResponseWriter, r *http.Request) {
 
 func getPing(w http.ResponseWriter, r *http.Request) {
 	var param string = mux.Vars(r)["key"]
-
 	if param == "ping" {
 		data := result{ // Create an instance of result struct
 			Data: "pong",
@@ -29,7 +28,6 @@ func getPing(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			fmt.Println("An error occurred marshaling json w/ key " + param)
 		} else { // Return the new marshaled json object
-			w.WriteHeader(http.StatusOK)
 			w.Header().Set("Content-Type", "application/json")
 			io.WriteString(w, string(resp))
 		}

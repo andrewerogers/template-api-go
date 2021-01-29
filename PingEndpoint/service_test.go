@@ -1,25 +1,35 @@
 package main
 
 import (
+	"io/ioutil"
 	"net/http"
-	"net/http/httptest"
-	"strconv"
 	"testing"
 )
 
 func TestGetPing1(t *testing.T) {
-	req, err := http.NewRequest("GET", "/test/ping", nil)
+	resp, err := http.Get("http://localhost:8080/test/ping")
 	if err != nil {
 		// Don't want to write any error in this case
 	}
 
-	responseRecorder := httptest.NewRecorder()
-	handler := http.HandlerFunc(getPing)
-	handler.ServeHTTP(responseRecorder, req)
+	body,err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		// Don't want to write any error in this case
+	} else if string(body) != `{"Data":"pong"}` {
+		t.Error("Wrong response for ping, got " + string(body) + "expected {\"Data\":\"pong\"}")
+	}
+}
 
-	if responseRecorder.Code != http.StatusOK {
-		t.Error("Handler returned status code " + strconv.Itoa(responseRecorder.Code))
-	} else if responseRecorder.Body.String() != "{\"Data\":\"pong\"}" {
-		t.Error("Wrong response returned for key: ping, response got " + responseRecorder.Body.String() + " expected pong")
+func TestGetPing2(t *testing.T) {
+	resp, err := http.Get("http://localhost:8080/test/123")
+	if err != nil {
+		// Don't want to write any error in this case
+	}
+
+	body,err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		// Don't want to write any error in this case
+	} else if string(body) == `{"Data":"pong"}` {
+		t.Error("Wrong response for ping, got " + string(body) + "expected ")
 	}
 }
