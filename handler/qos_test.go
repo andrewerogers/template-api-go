@@ -10,7 +10,7 @@ import (
 func TestPing(t *testing.T) {
 	rr := httptest.NewRecorder()
 	req, _ := http.NewRequest(http.MethodGet, "/ping", nil)
-    handler := http.HandlerFunc(Ping)
+	handler := http.HandlerFunc(Ping)
 	expected := `{"message":"healthy"}`
 
 	handler.ServeHTTP(rr, req)
@@ -21,7 +21,7 @@ func TestPing(t *testing.T) {
 func TestSPing(t *testing.T) {
 	rr := httptest.NewRecorder()
 	req, _ := http.NewRequest(http.MethodGet, "/sping", nil)
-    handler := http.HandlerFunc(Ping)
+	handler := http.HandlerFunc(Ping)
 	expected := `{"message":"healthy"}`
 
 	handler.ServeHTTP(rr, req)
