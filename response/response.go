@@ -6,7 +6,7 @@ import (
 )
 
 type GeneralResponse struct {
-	Message string
+	Message string `json:"message"`
 }
 
 func (gr GeneralResponse) Write(w http.ResponseWriter) {
