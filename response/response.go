@@ -11,6 +11,6 @@ type GeneralResponse struct {
 
 func (gr GeneralResponse) Write(w http.ResponseWriter) {
 	json, _ := json.Marshal(gr)
-	w.WriteHeader(200)
+	w.WriteHeader(http.StatusOK)
 	w.Write(json)
 }
