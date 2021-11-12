@@ -7,12 +7,12 @@ import (
 )
 
 type Route interface { 
-	Create(router *mux.Router)
+	Register(router *mux.Router)
 }
 
 type Qos struct {}
 
-func (q Qos) Create(router *mux.Router) {
+func (q Qos) Register(router *mux.Router) {
 	router.HandleFunc("/ping", handler.Ping).Methods(http.MethodGet)
 	router.HandleFunc("/sping", handler.SPing).Methods(http.MethodGet)
 }

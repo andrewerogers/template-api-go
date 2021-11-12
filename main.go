@@ -15,10 +15,11 @@ func main() {
 	http.ListenAndServe(":8080", router)
 }
 
+// createRouter registers all service routes 
 func createRouter() *mux.Router {
 	router := mux.NewRouter()
 	for _, r := range routes {
-		r.Create(router)
+		r.Register(router)
 	}
 	return router
 }
