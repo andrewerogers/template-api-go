@@ -1,13 +1,24 @@
 package main
 
 import (
-	"github.com/gorilla/mux"
-	"github.com/andrewerogers/template-api-go/route"
 	"net/http"
+	"github.com/andrewerogers/template-api-go/route"
+	"github.com/gorilla/mux"
 )
 
+var routes []route.Route = []route.Route{ 
+	route.Qos{}, 
+}
+
 func main() {
-	router := mux.NewRouter() // Uses mux router
-	route.Qos(router)
+	router := createRouter()
 	http.ListenAndServe(":8080", router)
+}
+
+func createRouter() *mux.Router {
+	router := mux.NewRouter()
+	for _, r := range routes {
+		r.Create(router)
+	}
+	return router
 }

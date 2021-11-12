@@ -6,7 +6,13 @@ import (
 	"github.com/andrewerogers/template-api-go/handler"
 )
 
-func Qos(router *mux.Router) {
+type Route interface { 
+	Create(router *mux.Router)
+}
+
+type Qos struct {}
+
+func (q Qos) Create(router *mux.Router) {
 	router.HandleFunc("/ping", handler.Ping).Methods(http.MethodGet)
 	router.HandleFunc("/sping", handler.SPing).Methods(http.MethodGet)
 }
